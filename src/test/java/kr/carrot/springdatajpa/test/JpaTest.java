@@ -32,61 +32,58 @@ public class JpaTest {
                 .name("part1")
                 .build();
 
-        EmployeeId employeeId = new EmployeeId(10L, 10L);
         EmployeeEntity employeeEntity = EmployeeEntity.builder()
-                .empId(employeeId)
+                .empId(10L)
                 .name("carrot")
                 .age(26)
                 .build();
-//        employeeEntity.assignDepartment(departmentEntity);
-
-        departmentEntity.addEmployee(employeeEntity);
+        employeeEntity.assignDepartment(departmentEntity);
 
         departmentRepository.save(departmentEntity);
         em.flush();
         em.clear();
     }
 
-//    @Test
-//    @Transactional
-//    public void test_1() {
-//        EmployeeEntity employeeEntity = EmployeeEntity.builder()
-//                .empId(10L)
-//                .name("carrot")
-//                .age(26)
-//                .build();
-//        employeeRepository.save(employeeEntity);
-//
-//        DepartmentEntity departmentEntity = DepartmentEntity.builder()
-//                .name("part1")
-//                .build();
-//        departmentRepository.save(departmentEntity);
-//
-//        em.flush();
-//        em.clear();
-//    }
-//
-//    @Test
-//    @Transactional
-//    public void test_2() {
-//        DepartmentEntity departmentEntity = DepartmentEntity.builder()
-//                .name("part1")
-//                .build();
-//
-//        EmployeeEntity employeeEntity = EmployeeEntity.builder()
-//                .empId(10L)
-//                .name("carrot")
-//                .age(26)
-//                .build();
-//        employeeEntity.assignDepartment(departmentEntity);
-//
-//
-//        departmentRepository.save(departmentEntity);
-//        em.flush();
-//        em.clear();
-//
-//        System.out.println(employeeEntity);
-//    }
+    @Test
+    @Transactional
+    public void test_1() {
+        EmployeeEntity employeeEntity = EmployeeEntity.builder()
+                .empId(10L)
+                .name("carrot")
+                .age(26)
+                .build();
+        employeeRepository.save(employeeEntity);
+
+        DepartmentEntity departmentEntity = DepartmentEntity.builder()
+                .name("part1")
+                .build();
+        departmentRepository.save(departmentEntity);
+
+        em.flush();
+        em.clear();
+    }
+
+    @Test
+    @Transactional
+    public void test_2() {
+        DepartmentEntity departmentEntity = DepartmentEntity.builder()
+                .name("part1")
+                .build();
+
+        EmployeeEntity employeeEntity = EmployeeEntity.builder()
+                .empId(10L)
+                .name("carrot")
+                .age(26)
+                .build();
+        employeeEntity.assignDepartment(departmentEntity);
+
+
+        departmentRepository.save(departmentEntity);
+        em.flush();
+        em.clear();
+
+        System.out.println(employeeEntity);
+    }
 
     @Test
     @Transactional(readOnly = true)
