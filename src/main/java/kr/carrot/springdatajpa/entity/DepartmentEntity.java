@@ -34,4 +34,9 @@ public class DepartmentEntity {
                 ", employeeEntityList=" + employeeEntityList +
                 '}';
     }
+
+    public void addEmployee(EmployeeEntity employeeEntity) {
+        employeeEntity.assignDepartment(this);
+        employeeEntityList.add(employeeEntity);
+    }
 }

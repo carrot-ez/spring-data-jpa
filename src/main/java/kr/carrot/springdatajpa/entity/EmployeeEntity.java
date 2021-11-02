@@ -8,32 +8,65 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@IdClass(EmployeeId.class)
+//@IdClass(EmployeeId.class) // using @IdClass
 public class EmployeeEntity {
 
-    @Id
-    @Column(name = "emp_id")
-    private Long empId;
+    // using @IdClass
+//    @Id
+//    @Column(name = "emp_id")
+//    private Long empId;
+//
+//    @Id
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "dep_id", updatable = false, insertable = false)
+//    private DepartmentEntity depId;
 
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dep_id", updatable = false, insertable = false)
-    private DepartmentEntity depId;
+    // using @EmbeddedId
+    @EmbeddedId
+    private EmployeeId empId;
 
     private String name;
     private Integer age;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dep_id", updatable = false, insertable = false)
+    @MapsId("depId")
+    private DepartmentEntity depId;
+
+
+    // using @IdClass
+//    @Builder
+//    public EmployeeEntity(Long empId, String name, Integer age) {
+//        this.empId = empId;
+//        this.name = name;
+//        this.age = age;
+//    }
+
+    // using @EmbeddedId
+
+
+//    @Builder
+//    public EmployeeEntity(Long empId, Long depId, String name, Integer age) {
+//        this.empId = new EmployeeId(empId, depId);
+//        this.name = name;
+//        this.age = age;
+//    }
+
 
     @Builder
-    public EmployeeEntity(Long empId, String name, Integer age) {
+    public EmployeeEntity(EmployeeId empId, String name, Integer age) {
         this.empId = empId;
         this.name = name;
         this.age = age;
     }
 
+//    public void assignDepartment(DepartmentEntity departmentEntity) {
+//        this.depId = departmentEntity;
+//        departmentEntity.getEmployeeEntityList().add(this);
+//    }
+
     public void assignDepartment(DepartmentEntity departmentEntity) {
         this.depId = departmentEntity;
-        departmentEntity.getEmployeeEntityList().add(this);
     }
 
     @Override
