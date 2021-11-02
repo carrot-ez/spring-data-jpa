@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @EqualsAndHashCode
 @Data
-@Embeddable
+//@Embeddable // using @EmbeddedId
 public class EmployeeId implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -16,13 +16,13 @@ public class EmployeeId implements Serializable {
 
     private Long empId;
 
-    private Long depId;
+    private Long department;
 
     public EmployeeId() {
     }
 
-    public EmployeeId(Long empId, Long depId) {
+    public EmployeeId(Long empId, Long department) {
         this.empId = empId;
-        this.depId = depId;
+        this.department = department;
     }
 }

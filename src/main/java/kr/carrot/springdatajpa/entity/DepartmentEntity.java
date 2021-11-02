@@ -18,7 +18,7 @@ public class DepartmentEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "depId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EmployeeEntity> employeeEntityList = new ArrayList<>();
 
     @Builder

@@ -34,7 +34,7 @@ public class EmployeeEntity {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dep_id", updatable = false, insertable = false)
-    private DepartmentEntity depId;
+    private DepartmentEntity department;
 
     private String name;
     private Integer age;
@@ -47,7 +47,7 @@ public class EmployeeEntity {
     }
 
     public void assignDepartment(DepartmentEntity departmentEntity) {
-        this.depId = departmentEntity;
+        this.department = departmentEntity;
         departmentEntity.getEmployeeEntityList().add(this);
     }
 
@@ -55,7 +55,7 @@ public class EmployeeEntity {
     public String toString() {
         return "EmployeeEntity{" +
                 "empId=" + empId +
-                ", depId=" + depId.getId() +
+                ", depId=" + department.getId() +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 '}';

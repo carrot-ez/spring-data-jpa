@@ -9,11 +9,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
 @SpringBootTest
+@Rollback(value = false)
 public class JpaTest {
 
     @Autowired
@@ -90,7 +92,7 @@ public class JpaTest {
     public void test_3() {
         EmployeeId employeeId = new EmployeeId();
         employeeId.setEmpId(10L);
-        employeeId.setDepId(1L);
+        employeeId.setDepartment(1L);
 
         EmployeeEntity employeeEntity = employeeRepository.findById(employeeId).get();
 
