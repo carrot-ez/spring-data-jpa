@@ -27,6 +27,8 @@ public class JpaTest {
     @Transactional
     public void test_1() {
         EmployeeEntity employeeEntity = EmployeeEntity.builder()
+                .empId(10L)
+                .depId(50L)
                 .name("carrot")
                 .age(26)
                 .build();
