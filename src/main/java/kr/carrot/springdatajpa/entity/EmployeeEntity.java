@@ -1,10 +1,7 @@
 package kr.carrot.springdatajpa.entity;
 
 import kr.carrot.springdatajpa.entity.id.EmployeeId;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -19,17 +16,33 @@ public class EmployeeEntity {
     private Long empId;
 
     @Id
-    @Column(name = "dep_id")
-    private Long depId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dep_id", updatable = false, insertable = false)
+    private DepartmentEntity depId;
 
     private String name;
     private Integer age;
 
+
     @Builder
-    public EmployeeEntity(Long empId, Long depId, String name, Integer age) {
+    public EmployeeEntity(Long empId, String name, Integer age) {
         this.empId = empId;
-        this.depId = depId;
         this.name = name;
         this.age = age;
+    }
+
+    public void assignDepartment(DepartmentEntity departmentEntity) {
+        this.depId = departmentEntity;
+        departmentEntity.getEmployeeEntityList().add(this);
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeEntity{" +
+                "empId=" + empId +
+                ", depId=" + depId.getId() +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                '}';
     }
 }

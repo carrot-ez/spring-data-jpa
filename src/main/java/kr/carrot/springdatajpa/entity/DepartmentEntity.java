@@ -1,12 +1,11 @@
 package kr.carrot.springdatajpa.entity;
 
 import kr.carrot.springdatajpa.entity.id.EmployeeId;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,8 +18,20 @@ public class DepartmentEntity {
 
     private String name;
 
+    @OneToMany(mappedBy = "depId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EmployeeEntity> employeeEntityList = new ArrayList<>();
+
     @Builder
     public DepartmentEntity(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "DepartmentEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", employeeEntityList=" + employeeEntityList +
+                '}';
     }
 }
